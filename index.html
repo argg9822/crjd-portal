@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corporación Red de Justicia y del Derecho</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    :root {
+      --navy:       #0D1F3C;
+      --navy-mid:   #162d54;
+      --navy-light: #1e3d70;
+      --gold:       #C8973A;
+      --gold-light: #e0b25a;
+      --cream:      #F5F0E8;
+      --cream-dark: #EDE6D8;
+      --white:      #FFFFFF;
+      --gray-soft:  #6B7280;
+      --text-dark:  #1a1a2e;
+      --shadow-gold: 0 4px 24px rgba(200,151,58,0.18);
+      --shadow-navy: 0 8px 40px rgba(13,31,60,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(13,31,60,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,151,58,0.2);
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(13,31,60,1);
+      box-shadow: var(--shadow-navy);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+      flex-shrink: 0;
+      box-shadow: var(--shadow-gold);
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+    .nav-logo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+    .nav-logo-sub {
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover {
+      color: var(--gold-light);
+      background: rgba(200,151,58,0.1);
+    }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+      color: var(--navy) !important;
+      font-weight: 600 !important;
+      padding: 0.55rem 1.2rem !important;
+      border-radius: 8px !important;
+      box-shadow: var(--shadow-gold);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(200,151,58,0.35) !important;
+      background: var(--gold-light) !important;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(150deg, var(--navy) 0%, var(--navy-mid) 55%, var(--navy-light) 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(200,151,58,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,151,58,0.07) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-ornament {
+      position: absolute;
+      right: -60px; top: 50%;
+      transform: translateY(-50%);
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,151,58,0.15);
+      pointer-events: none;
+    }
+    .hero-ornament::before {
+      content: '';
+      position: absolute;
+      inset: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,151,58,0.1);
+    }
+    .hero-ornament::after {
+      content: '';
+      position: absolute;
+      inset: 90px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,151,58,0.08);
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(200,151,58,0.12);
+      border: 1px solid rgba(200,151,58,0.3);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.18;
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold-light);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: var(--shadow-gold);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,151,58,0.4);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--white);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      animation: fadeUp 0.6s 0.4s ease both;
+      flex-wrap: wrap;
+    }
+    .stat-item {}
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      margin-top: 0.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECCIÓN BASE ── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-tag::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray-soft);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── QUIÉNES SOMOS ── */
+    #quienes {
+      background: var(--cream);
+    }
+    .quienes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .quienes-visual {
+      position: relative;
+    }
+    .quienes-card {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .quienes-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,151,58,0.2);
+    }
+    .quienes-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -30px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,151,58,0.12);
+    }
+    .quienes-icon-big {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .quienes-card h3 {
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .quienes-card p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+    .quienes-badge {
+      position: absolute;
+      bottom: -18px; right: 2rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      box-shadow: var(--shadow-gold);
+    }
+    .quienes-content .values {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .value-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+    .value-text {
+      font-size: 0.95rem;
+      color: #4a4a6a;
+      line-height: 1.65;
+    }
+
+    /* ── SERVICIOS ── */
+    #servicios {
+      background: var(--white);
+    }
+    .servicios-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid #E8E4DC;
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      transform-origin: left;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-navy);
+      border-color: transparent;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 56px; height: 56px;
+      background: var(--cream);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: all 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    }
+    .service-card h3 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--gray-soft);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .service-link:hover { color: var(--gold); }
+    .service-link svg {
+      transition: transform 0.2s;
+    }
+    .service-link:hover svg { transform: translateX(3px); }
+
+    /* ── ÁMBITO ACADÉMICO Y CONTABLE ── */
+    #ambitos {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+    #ambitos::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 90% 50%, rgba(200,151,58,0.1) 0%, transparent 70%);
+    }
+    .ambitos-inner { position: relative; z-index: 1; }
+    #ambitos .section-title { color: var(--white); }
+    #ambitos .section-subtitle { color: rgba(255,255,255,0.55); }
+    .ambitos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .ambito-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,151,58,0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.3s;
+    }
+    .ambito-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(200,151,58,0.4);
+      transform: translateY(-3px);
+    }
+    .ambito-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .ambito-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    .ambito-header h3 {
+      font-size: 1.2rem;
+      color: var(--white);
+    }
+    .ambito-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .ambito-card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+    }
+    .ambito-card ul li::before {
+      content: '›';
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: -1px;
+    }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      background: var(--cream);
+    }
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contacto-info h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .contacto-info p {
+      font-size: 1rem;
+      color: var(--gray-soft);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid #E8E4DC;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-method:hover {
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold);
+      transform: translateX(4px);
+    }
+    .contact-method-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .icon-wa { background: #e7f7ef; }
+    .icon-phone { background: #e8edf7; }
+    .icon-mail { background: #f7f0e8; }
+    .contact-method-text {}
+    .contact-method-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-soft);
+    }
+    .contact-method-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ── FORMULARIO ── */
+    .form-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-navy);
+      border: 1px solid rgba(13,31,60,0.06);
+    }
+    .form-card h3 {
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .form-card > p {
+      font-size: 0.875rem;
+      color: var(--gray-soft);
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid #E0DAD0;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,151,58,0.12);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover {
+      background: linear-gradient(135deg, var(--navy-light), var(--gold));
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-navy);
+    }
+
+    /* ── WHATSAPP FLOTANTE ── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+    .wa-tooltip {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all 0.2s;
+      pointer-events: none;
+    }
+    .wa-float:hover .wa-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .wa-btn {
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-wa 2.5s ease infinite;
+    }
+    .wa-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+      animation: none;
+    }
+    .wa-btn svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(200,151,58,0.2);
+      padding: 3rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      max-width: 320px;
+      line-height: 1.7;
+      margin-top: 0.75rem;
+    }
+    .footer-links h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-links ul a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links ul a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-bottom span {
+      color: var(--gold);
+    }
+
+    /* ── ANIMACIONES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .quienes-grid,
+      .contacto-grid,
+      .ambitos-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.25rem; }
+      .form-card { padding: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <div class="nav-logo-icon">RJD</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-title">Red de Justicia y del Derecho</span>
+          <span class="nav-logo-sub">Corporación · Sin ánimo de lucro</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#quienes">Quiénes Somos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#ambitos">Ámbitos</a></li>
+        <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="inicio">
+    <div class="hero-grid"></div>
+    <div class="hero-ornament"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">Entidad sin ánimo de lucro · Colombia</div>
+      <h1>Acceso a la <em>justicia</em> para todos los colombianos</h1>
+      <p>Facilitamos a nivel nacional el proceso de acceso a la justicia, promoviendo el bien común, la equidad y el respeto a los derechos fundamentales de cada persona.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Solicitar asesoría
+        </a>
+        <a href="#servicios" class="btn-secondary">
+          Ver nuestros servicios
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Virtual y accesible</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">+15</div>
+          <div class="stat-label">Tipos de servicios</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Nacional</div>
+          <div class="stat-label">Cobertura en Colombia</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUIÉNES SOMOS ── -->
+  <section id="quienes">
+    <div class="section-inner">
+      <div class="quienes-grid">
+        <div class="quienes-visual">
+          <div class="quienes-card">
+            <div class="quienes-icon-big">⚖️</div>
+            <h3>Justicia al alcance de todos</h3>
+            <p>Somos una entidad sin ánimo de lucro comprometida con facilitar el acceso a la justicia a nivel nacional, ayudando a construir una sociedad más justa, cohesionada y equitativa.</p>
+          </div>
+          <div class="quienes-badge">✦ Desde 2021</div>
+        </div>
+        <div class="quienes-content">
+          <div class="section-tag">Quiénes Somos</div>
+          <h2 class="section-title">Comprometidos con tus derechos</h2>
+          <p class="section-subtitle">Creemos que cada persona, sin importar su condición, merece conocer y ejercer sus derechos. Por eso trabajamos de forma virtual, cercana y efectiva.</p>
+          <div class="values">
+            <div class="value-item">
+              <div class="value-dot"></div>
+              <p class="value-text"><strong>Misión:</strong> Facilitar el acceso a la justicia a nivel nacional mediante asesoría jurídica accesible, transparente y de calidad.</p>
+            </div>
+            <div class="value-item">
+              <div class="value-dot"></div>
+              <p class="value-text"><strong>Modalidad 100% virtual:</strong> Todos los trámites se llevan a cabo de forma virtual para mayor comodidad y alcance geográfico.</p>
+            </div>
+            <div class="value-item">
+              <div class="value-dot"></div>
+              <p class="value-text"><strong>Compromiso social:</strong> Promovemos el bien común, la equidad y el respeto hacia los derechos fundamentales de los colombianos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICIOS ── -->
+  <section id="servicios">
+    <div class="section-inner">
+      <div class="servicios-header">
+        <div>
+          <div class="section-tag">Nuestros Servicios</div>
+          <h2 class="section-title">¿En qué podemos ayudarte?</h2>
+        </div>
+        <p class="section-subtitle" style="max-width: 360px; font-size: 0.95rem;">Ofrecemos orientación jurídica integral en diversas áreas del derecho colombiano.</p>
+      </div>
+      <div class="servicios-grid">
+        <div class="service-card">
+          <div class="service-icon">📋</div>
+          <h3>Derechos de Petición</h3>
+          <p>Redactamos y gestionamos derechos de petición ante entidades públicas, privadas, centrales de riesgo, servicios públicos, impuestos y más.</p>
+          <a href="#contacto" class="service-link">
+            Solicitar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <h3>Tutelas</h3>
+          <p>Protegemos tus derechos fundamentales: vida, salud, educación, pensión, libertad, buen nombre, habeas data, estabilidad laboral y muchos más.</p>
+          <a href="#contacto" class="service-link">
+            Solicitar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚖️</div>
+          <h3>Demandas</h3>
+          <p>Acompañamos y representamos a nuestros clientes en procesos judiciales, desde la preparación hasta la presentación ante las autoridades competentes.</p>
+          <a href="#contacto" class="service-link">
+            Solicitar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h3>Asesoría Jurídica Empresarial</h3>
+          <p>Constitución de empresas, contratos mercantiles, protección de marcas, representación legal y asesoramiento normativo para su negocio.</p>
+          <a href="#contacto" class="service-link">
+            Solicitar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💬</div>
+          <h3>Consultas Jurídicas</h3>
+          <p>Orientación y respuestas concretas sobre temas legales específicos, desde dudas sencillas hasta situaciones complejas en cualquier área del derecho.</p>
+          <a href="#contacto" class="service-link">
+            Solicitar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📁</div>
+          <h3>Actas de Debido Proceso</h3>
+          <p>Elaboración y revisión de actas especiales de debido proceso para garantizar el cumplimiento de los procedimientos legales establecidos.</p>
+          <a href="#contacto" class="service-link">
+            Solicitar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ÁMBITOS ── -->
+  <section id="ambitos">
+    <div class="section-inner ambitos-inner">
+      <div class="section-tag" style="color: var(--gold-light);">Áreas de Acción</div>
+      <h2 class="section-title">Ámbitos de trabajo</h2>
+      <p class="section-subtitle">Nuestra corporación actúa en múltiples frentes para ofrecer una atención integral.</p>
+      <div class="ambitos-grid">
+        <div class="ambito-card">
+          <div class="ambito-header">
+            <div class="ambito-icon">🎓</div>
+            <h3>Ámbito Académico</h3>
+          </div>
+          <ul>
+            <li>Asesoría en procesos disciplinarios educativos</li>
+            <li>Derechos de petición ante instituciones educativas</li>
+            <li>Tutelas por derecho a la educación</li>
+            <li>Orientación en normativa educativa vigente</li>
+            <li>Acompañamiento en conflictos académicos</li>
+          </ul>
+        </div>
+        <div class="ambito-card">
+          <div class="ambito-header">
+            <div class="ambito-icon">📊</div>
+            <h3>Ámbito Contable</h3>
+          </div>
+          <ul>
+            <li>Asesoría jurídica sobre normativa tributaria</li>
+            <li>Gestión de derechos de petición tributarios</li>
+            <li>Peticiones por impuesto predial y tasas</li>
+            <li>Solicitud de paz y salvo por pago de hipotecas</li>
+            <li>Orientación en disputas contables con entidades</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACTO ── -->
+  <section id="contacto">
+    <div class="section-inner">
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <div class="section-tag">Contáctenos</div>
+          <h2 class="section-title">Estamos para ayudarte</h2>
+          <p>Diligencie el formulario o comuníquese directamente con nosotros. Le responderemos a la brevedad posible.</p>
+          <div class="contact-methods">
+            <a href="https://wa.me/3225141594" target="_blank" class="contact-method">
+              <div class="contact-method-icon icon-wa">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.984-1.407A9.94 9.94 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.72 0-3.328-.463-4.714-1.268l-.338-.2-3.508.99.941-3.44-.22-.352A7.944 7.944 0 0 1 4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z"/></svg>
+              </div>
+              <div class="contact-method-text">
+                <div class="contact-method-label">WhatsApp</div>
+                <div class="contact-method-value">322 514 1594</div>
+              </div>
+            </a>
+            <a href="tel:3114252911" class="contact-method">
+              <div class="contact-method-icon icon-phone">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1e3d70" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.09z"/></svg>
+              </div>
+              <div class="contact-method-text">
+                <div class="contact-method-label">Celular</div>
+                <div class="contact-method-value">311 425 2911</div>
+              </div>
+            </a>
+            <a href="mailto:Corporacionrjd2021@gmail.com" class="contact-method">
+              <div class="contact-method-icon icon-mail">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8973A" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-method-text">
+                <div class="contact-method-label">Correo electrónico</div>
+                <div class="contact-method-value">Corporacionrjd2021@gmail.com</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Envíenos su consulta</h3>
+          <p>Complete el formulario y nos comunicaremos con usted pronto.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" placeholder="Su nombre"/>
+            </div>
+            <div class="form-group">
+              <label>Apellido</label>
+              <input type="text" placeholder="Su apellido"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input type="tel" placeholder="3xx xxx xxxx"/>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" placeholder="correo@ejemplo.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Tipo de servicio</label>
+            <select>
+              <option value="">Seleccione un servicio...</option>
+              <option>Consulta jurídica</option>
+              <option>Derecho de petición</option>
+              <option>Tutela</option>
+              <option>Demanda</option>
+              <option>Asesoría empresarial</option>
+              <option>Ámbito académico</option>
+              <option>Ámbito contable</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Descripción del caso</label>
+            <textarea placeholder="Cuéntenos brevemente su situación o consulta..."></textarea>
+          </div>
+          <button class="form-submit" type="submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar solicitud
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#inicio" class="nav-logo" style="margin-bottom: 0.75rem; display: inline-flex;">
+            <div class="nav-logo-icon">RJD</div>
+            <div class="nav-logo-text">
+              <span class="nav-logo-title">Red de Justicia y del Derecho</span>
+              <span class="nav-logo-sub">Corporación · Sin ánimo de lucro</span>
+            </div>
+          </a>
+          <p>Facilitando el acceso a la justicia para todos los colombianos, de forma virtual y accesible a nivel nacional.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#quienes">Quiénes Somos</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#ambitos">Ámbitos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#contacto">Derechos de Petición</a></li>
+            <li><a href="#contacto">Tutelas</a></li>
+            <li><a href="#contacto">Demandas</a></li>
+            <li><a href="#contacto">Consultas Jurídicas</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="https://wa.me/3225141594">WhatsApp: 322 514 1594</a></li>
+            <li><a href="tel:3114252911">Cel: 311 425 2911</a></li>
+            <li><a href="mailto:Corporacionrjd2021@gmail.com">Correo electrónico</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Corporación Red de Justicia y del Derecho. Todos los derechos reservados.</p>
+        <p>Hecho con <span>♥</span> para la justicia colombiana</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── WHATSAPP FLOTANTE ── -->
+  <div class="wa-float">
+    <div class="wa-tooltip">¡Escríbenos por WhatsApp!</div>
+    <a href="https://wa.me/3225141594" target="_blank" class="wa-btn" aria-label="Contactar por WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.984-1.407A9.94 9.94 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.72 0-3.328-.463-4.714-1.268l-.338-.2-3.508.99.941-3.44-.22-.352A7.944 7.944 0 0 1 4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger menu
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      const isOpen = links.style.display === 'flex';
+      links.style.display = isOpen ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '72px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(13,31,60,0.98)';
+      links.style.padding = '1rem 2rem 1.5rem';
+      links.style.gap = '0.25rem';
+      links.style.borderBottom = '1px solid rgba(200,151,58,0.2)';
+    }
+
+    // Smooth active nav link highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navAnchors.forEach(a => a.style.color = '');
+          const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (active) active.style.color = 'var(--gold-light)';
+        }
+      });
+    }, { threshold: 0.45 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
