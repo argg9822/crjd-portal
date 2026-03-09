@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- <title>Corporación Red de Justicia y del Derecho</title> --}}
     <title>{{ config('app.name', 'Corporación Red de Justicia y del Derecho') }}</title>
-    <link rel="icon" href="{{ asset('storage/logo.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('logo.ico') }}" type="image/x-icon" />
 
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
