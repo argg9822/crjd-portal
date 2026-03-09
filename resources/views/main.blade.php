@@ -1,4 +1,4 @@
-@extends('layouts.esqueleton')
+@extends('layouts.nav')
 
 @section('main')
 <!-- ── HERO ── -->
@@ -241,7 +241,7 @@
               <div class="contact-method-value">311 425 2911</div>
             </div>
           </a>
-          <a href="mailto:Corporacionrjd2021@gmail.com" class="contact-method">
+          <a href="mailto:servicioalcliente@corporacionrjd.org" class="contact-method">
             <div class="contact-method-icon icon-mail">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8973A" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -250,7 +250,7 @@
             </div>
             <div class="contact-method-text">
               <div class="contact-method-label">Correo electrónico</div>
-              <div class="contact-method-value">Corporacionrjd2021@gmail.com</div>
+              <div class="contact-method-value">servicioalcliente@corporacionrjd.org</div>
             </div>
           </a>
         </div>
